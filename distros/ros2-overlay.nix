@@ -317,6 +317,16 @@ with rosSelf.lib; {
     libcap = null;
   });
 
+  rttest = rosSuper.rttest.overrideAttrs (
+    {
+      meta ? { },
+      ...
+    }:
+    {
+        meta = meta // { platforms = self.lib.platforms.linux; };
+    }
+  );
+
   ros-gz-sim = rosSuper.ros-gz-sim.overrideAttrs ({
     postPatch ? "", ...
   }: {
